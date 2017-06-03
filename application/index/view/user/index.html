@@ -1,0 +1,33 @@
+{extend name="app" /}
+{block name="title"}博客{/block}
+{block name="content"}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12">
+                <div class="widget widget-user" style="overflow: hidden">
+
+                    <!--{if condition="$member.profile_image neq ''"}-->
+                    <!--<div class="widget-user-header" style="background: url({$member.profile_image}) center center;">-->
+                        <!--{else/}-->
+                        <div class="widget-user-header" style="background-color: #52768e;">
+                            <!--{/if}-->
+
+                        <h3 class="widget-user-username">{$member.user_name}</h3>
+                        <h5 class="widget-user-desc">{$member.description}</h5>
+                    </div>
+                    <div class="widget-user-image" id="upload-avatar">
+                        <img style="background-color: #607D8B" class="img-circle" src="{$member.avatar}" alt="User Avatar">
+                    </div>
+                    <div class="widget-user-body mt-30">
+
+                        {include file="../application/index/view/user/show_owner.html"}
+
+                            @include('user.show_visiter',$user)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{/block}

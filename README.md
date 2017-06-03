@@ -1,2 +1,2 @@
-# thinkphp5-blog
-Based on ThinkPHP5
+账号：1662853651@163.com
+密码：123456

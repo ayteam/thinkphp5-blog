@@ -1,0 +1,14 @@
+<div class="widget widget-default">
+    <div class="widget-header"><h6><i class="fa fa-folder fa-fw"></i>分类</h6></div>
+    <ul class="widget-body list-group">
+        {foreach $categorys as $cate}
+
+            <a title="{$cate.category_name}" href="/index/category/{$cate.id}"
+               class="list-group-item {if condition='!empty($category) && $cate.id == $category.id'} active {/if}">
+                {$cate.category_name}
+                <span class="badge">{$cate.article_count}</span>
+            </a>
+
+        {/foreach}
+    </ul>
+</div>

@@ -1,0 +1,108 @@
+{extend name="app" /}
+{block name="title"}{/block}
+{block name="css"}
+<link href="/static/sweetalert/sweetalert.css">
+
+{/block}
+{block name="content"}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget widget-default">
+                <div class="widget-header">
+                    <h6><i class="fa fa-comments fa-fw"></i>评论</h6>
+                </div>
+                <div class="widget-body">
+                    <table class="table table-hover table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>Email</th>
+                            <th>文字标题</th>
+                            <th>评论内容</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $comments['data'] as $comment}
+
+                            <tr class="">
+                                <td>
+                                    <a href="/user/">{$comment.user_name}</a>
+                                </td>
+                                <td><a href="mailto:{$comment.email}">{$comment.email}</a></td>
+                                <td>
+
+                                    <a target="_blank"
+                                       href="/index/article/index">{$comment.title}
+                                    </a>
+
+                                </td>
+                                <td data-toggle="tooltip" data-placement="top"
+                                    title="{{ $comment->content }}">{$comment.html_content}</td>
+                                <td>
+                                    {if condition="$comment.status ==1"}
+
+                                   <span class="label label-sm label-primary"> 已启用 </span>
+                                    {else/}
+                                    <span class="label label-sm label-danger"> 已禁用 </span>
+                                    {/if}
+                                </td>
+                                <td>
+                                    {if condition="$comment.status ==1"}
+                                    <button type="submit"
+                                            class="btn btn-danger"
+                                            onclick="isOpen('/admin/comment/isOpen?status=2&id={$comment.id}'); return false;"
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="禁用">
+                                        <i class="fa fa-minus-square"></i>
+                                    </button>
+                                    {else/}
+                                    <button type="submit"
+                                            class="btn btn-primary"
+                                            data-url="{{ route('comment.destroy',$comment->id) }}"
+                                            onclick="isOpen('/admin/comment/isOpen?status=1&id={$comment.id}'); return false;"
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="启用">
+                                        <i class="fa fa-check-square"></i>
+                                    </button>
+                                    {/if}
+
+                                </td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{/block}
+{block name="script"}
+<script src="/static/sweetalert/sweetalert.min.js"></script>
+
+<script>
+    //启用/禁用
+    function isOpen(url){
+        $.get(url,function (data) {
+            if(data.status==1){
+                swal({
+                    title: "OK！",
+                    type:'success',
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                },1000)
+            }else {
+                swal("", "稍后再试！", "error");
+            }
+        });
+    }
+</script>
+{/block}

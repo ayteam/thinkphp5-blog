@@ -1,0 +1,74 @@
+{extend name="app" /}
+{block name="title"}博客{/block}
+{block name="title"}博客{/block}
+{block name="content"}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {if condition="$count == 0"}
+            <h3 class="meta-item center-block">No posts</h3>
+            {else /}
+            {foreach $articles['data'] as $article}
+            <article class="post">
+                <!-- post header -->
+                <div class="post-header">
+                    <h1 class="post-title">
+                        <a title="{$article.title}" href="{{ route('post.show',$article->slug) }}">{$article.title}</a>
+                    </h1>
+                    <div class="post-meta">
+                           <span class="post-time">
+                           <i class="fa fa-calendar-o"></i>
+                           <time datetime="2016-08-05T00:10:14+08:00">
+                           {$article.create_date}
+                           </time>
+                           </span>
+                        <span class="post-category">
+                           &nbsp;|&nbsp;
+                           <i class="fa fa-folder-o"></i>
+                           <a href="{{ route('category.show',$article->category->name) }}">
+                           {$article.category_name}
+                           </a>
+                           </span>
+                        <span class="post-comments-count">
+                           &nbsp;|&nbsp;
+                           <i class="fa fa-comments-o fa-fw" aria-hidden="true"></i>
+                           <span>{$article.comment_count}</span>
+                           </span>
+                    </div>
+                </div>
+
+                <div class="post-description">
+
+                    {$article.description}
+
+                </div>
+                <div class="post-permalink">
+                    <a title="阅读全文" href="{{ route('post.show',$article->slug) }}" class="btn btn-more">阅读全文</a>
+                </div>
+                <div class="post-footer clearfix">
+                    <div class="pull-left tag-list">
+                        <i class="fa fa-tags"></i>
+                        {foreach $article.tags as $tag}
+                        <a  class="tag" href="">{$tag.tag_name}</a>
+                        {/foreach}
+                    </div>
+                </div>
+            </article>
+            {/foreach}
+
+            {/if}
+            {if condition="$articles.last_page > 1"}
+            {$page}
+            {/if}
+
+        </div>
+        <div class="col-md-4">
+            <div class="slide">
+                {include file="../application/index/view/widget/user.html"}
+                {include file="../application/index/view/widget/hot_article.html"}
+                {include file="../application/index/view/widget/category.html"}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

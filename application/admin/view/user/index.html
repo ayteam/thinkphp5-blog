@@ -1,0 +1,48 @@
+{extend name="app" /}
+{block name="title"}{/block}
+{block name="content"}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget widget-default">
+                <div class="widget-header">
+                    <h6><i class="fa fa-user fa-fw"></i>用户</h6>
+                </div>
+                <div class="widget-body">
+                    <table class="table table-hover table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>日期</th>
+                            <th>邮箱</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $users['data'] as $user}
+                            <tr>
+                                <td>{$user.id}</td>
+                                <td><a href="/user">{$user.user_name}</a></td>
+                                <td>{$user.create_at}</td>
+                                <td>{$user.email}</td>
+                                <td><button type="button" class="btn btn-primary" href="/admin/user/info?id={$user.id}" data-toggle="modal" data-target="#baseModal">
+                                    查看详情
+                                </button></td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 模态框1 -->
+<div class="modal fade " id="baseModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated bounceInRight">
+
+        </div>
+    </div>
+</div>
+{/block}
