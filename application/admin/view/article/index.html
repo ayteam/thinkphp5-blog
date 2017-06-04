@@ -1,5 +1,8 @@
 {extend name="app" /}
 {block name="title"}{/block}
+{block name="css"}
+<link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css">
+{/block}
 {block name="content"}
     <div class="row">
         <div class="col-md-12">
@@ -29,50 +32,40 @@
                                     {if condition="$article.status ==1"}
                                     <span class="label label-sm label-primary"> 已发表 </span>
                                     {else/}
-                                    <span class="label label-sm label-danger"> 已禁用 </span>
+                                    <span class="label label-sm label-warning"> 已禁用 </span>
                                     {/if}
                                 </td>
                                 <td>
                                     <div>
-                                        <a href="{{ $post->trashed()?'javascript:void(0)':route('post.edit',$post->id) }}"
+                                        <div class="tooltip-demo">
+                                        <a href="/admin/article/edit/{$article.id}"
                                            data-toggle="tooltip" data-placement="top" title="编辑"
                                            class="btn btn-info">
                                             <i class="fa fa-pencil fa-fw"></i>
                                         </a>
-
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="恢复">
-                                            <i class="fa fa-repeat fa-fw"></i>
-                                        </button>
-
-
                                         <a href="{{ route('post.show',$post->slug) }}"
                                            data-toggle="tooltip" data-placement="top" title="查看"
                                            class="btn btn-success">
                                             <i class="fa fa-eye fa-fw"></i>
                                         </a>
-
-                                        <button type="submit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="撤销发布">
-                                            <i class="fa fa-undo fa-fw"></i>
+                                        <button onclick="isOpen('/admin/article/isOpen?status=1&id={$article.id}'); return false;"
+                                                class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="启用">
+                                            <i class="fa fa-check-square"></i>
                                         </button>
 
-                                        <a href="{{ route('post.preview',$post->slug) }}"  data-toggle="tooltip" data-placement="top" title="预览"
-                                           class="btn btn-default">
-                                            <i class="fa fa-eye fa-fw"></i>
-                                        </a>
-                                        <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="发布">
-                                            <i class="fa fa-send-o fa-fw"></i>
+                                        <button onclick="isOpen('/admin/article/isOpen?status=2&id={$article.id}'); return false;"
+                                                class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="禁用">
+                                            <i class="fa fa-minus-square"></i>
                                         </button>
 
-                                        <button class="btn btn-danger" data-toggle="modal" data-title="{{ $post->title }}"
-                                                data-toggle="tooltip" data-placement="top" title="删除"
-                                                data-url="{{ route('post.destroy',$post->id) }}"
-                                                data-force="{{ $post->trashed() }}"
-                                                data-target="#delete-post-modal">
+                                        <button onclick="isOpen('/admin/article/isOpen?status=-1&id={$article.id}'); return false;"
+                                                class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="删除">
                                             <i class="fa fa-trash-o  fa-fw"></i>
                                         </button>
-                                        <a class="btn btn-default" href="{{ route('post.download',$post->id) }}">
+                                        <a class="btn btn-default" href="{{ route('post.download',$post->id) }}" data-toggle="tooltip" data-placement="top" title="下载">
                                             <i class="fa fa-cloud-download fa-fw"></i>
                                         </a>
+                                    </div>
                                     </div>
                                 </td>
                             </tr>
@@ -113,17 +106,32 @@
 {/block}
 
 {block name="script"}
+<script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+
     <script>
-        $('#delete-post-modal').on('show.bs.modal', function (e) {
-            var url = $(e.relatedTarget).data('url');
-            var title = $(e.relatedTarget).data('title');
-            var force = $(e.relatedTarget).data('force');
-            var confirm_btn_text = force == '1' ? '确定(这将永久刪除)' : '删除';
-            var confirm_btn_type = force == '1' ? 'btn btn-danger' : 'btn btn-primary';
-            $('#confirm-btn').text(confirm_btn_text);
-            $('#confirm-btn').attr('class', confirm_btn_type);
-            $('#span-title').text(title);
-            $('#delete-form').attr('action', url);
+        $('.tooltip-demo').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
         });
+
+        //启用/禁用
+        function isOpen(url){
+            $.get(url,function (data) {
+                if(data.status==1){
+                    swal({
+                        title: "OK！",
+                        type:'success',
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+                    setTimeout(function () {
+                        window.location.reload();
+                    },1000)
+                }else {
+                    swal("", "小主，有错误！", "error");
+                }
+            });
+        }
+
     </script>
 {/block}

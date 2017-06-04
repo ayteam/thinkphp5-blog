@@ -23,3 +23,7 @@ use think\Route;
 Route::rule('index/category/:id','index/Category/index','get');
 Route::rule('login','index/Login/index','get');
 Route::rule('user/:id','index/User/index','get');
+
+//----------------------admin---------------------------
+Route::rule('admin/article/edit/:id','admin/Article/edit','get');
+Route::rule('admin/article/doEdit/:id','admin/Article/doEdit','post');
