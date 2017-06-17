@@ -36,37 +36,39 @@
                                     {/if}
                                 </td>
                                 <td>
-                                    <div>
-                                        <div class="tooltip-demo">
+                                    <div class="tooltip-demo">
                                         <a href="/admin/article/edit/{$article.id}"
                                            data-toggle="tooltip" data-placement="top" title="编辑"
                                            class="btn btn-info">
                                             <i class="fa fa-pencil fa-fw"></i>
                                         </a>
-                                        <a href="{{ route('post.show',$post->slug) }}"
+                                        <a href="/article/info/{$article.id}"
                                            data-toggle="tooltip" data-placement="top" title="查看"
                                            class="btn btn-success">
                                             <i class="fa fa-eye fa-fw"></i>
                                         </a>
-                                        <button onclick="isOpen('/admin/article/isOpen?status=1&id={$article.id}'); return false;"
-                                                class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="启用">
-                                            <i class="fa fa-check-square"></i>
-                                        </button>
-
+                                        {if condition="$article.status ==1"}
                                         <button onclick="isOpen('/admin/article/isOpen?status=2&id={$article.id}'); return false;"
                                                 class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="禁用">
                                             <i class="fa fa-minus-square"></i>
                                         </button>
 
+                                        {else/}
+
+                                        <button onclick="isOpen('/admin/article/isOpen?status=1&id={$article.id}'); return false;"
+                                                class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="启用">
+                                            <i class="fa fa-check-square"></i>
+                                        </button>
+                                        {/if}
                                         <button onclick="isOpen('/admin/article/isOpen?status=-1&id={$article.id}'); return false;"
                                                 class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="删除">
                                             <i class="fa fa-trash-o  fa-fw"></i>
                                         </button>
-                                        <a class="btn btn-default" href="{{ route('post.download',$post->id) }}" data-toggle="tooltip" data-placement="top" title="下载">
+                                        <a class="btn btn-default" href="/admin/article/download?id={$article.id}" data-toggle="tooltip" data-placement="top" title="下载">
                                             <i class="fa fa-cloud-download fa-fw"></i>
                                         </a>
                                     </div>
-                                    </div>
+
                                 </td>
                             </tr>
                         {/foreach}

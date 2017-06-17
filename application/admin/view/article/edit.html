@@ -29,7 +29,7 @@
                             <label for="categories" class="control-label">文章分类*</label>
                             <select name="category_id" class="form-control">
                                 {foreach $categorys as $category}
-                                <option value="{$category.id}">{$category.category_name}</option>
+                                <option value="{$category.id}" {if condition="$category.id == $article.category_id"} selected {/if}>{$category.category_name}</option>
                                 {/foreach}
                             </select>
                         </div>
@@ -37,7 +37,10 @@
                             <label for="tags[]" class="control-label">文章标签</label>
                             <select id="post-tags" name="tags[]" class="form-control" multiple>
                                 {foreach $tags as $tag}
-                                <option value="{$tag.id}">{$tag.tag_name}</option>
+                                    {foreach $articleTags as $articleTag}
+
+                                        <option value="{$tag.id}" {if condition="$articleTag.id == $tag.id"} selected {/if}>{$tag.tag_name}</option>
+                                    {/foreach}
                                 {/foreach}
                             </select>
                         </div>

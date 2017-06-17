@@ -2,8 +2,10 @@
 namespace app\index\controller;
 
 use app\index\model\Category;
+use think\Cache;
 use think\Controller;
 use app\index\model\Article;
+use think\Request;
 
 
 class Base extends Controller
@@ -13,6 +15,7 @@ class Base extends Controller
         'assignUser',
         'assignHotArticle',
         'assignCategory' ,
+        'updateArticleViewCount' =>  ['except'=>'Article.info'],
     ];
 
     protected function assignUser(){
@@ -39,6 +42,22 @@ class Base extends Controller
             $categorys[$key]['article_count'] = $acticle->queryForCount(array(['category_id','=',$category['id']]));
         }
         $this->assign('categorys',$categorys);
+    }
+
+    protected function updateArticleViewCount(){
+        $request = Request::instance();
+        $id = $request->param('id');
+        $ip = getIp();
+        $ipArray = Cache::get('ipArray');
+        $ipArray = empty($ipArray) ? array() :$ipArray;
+        if(!in_array($ip,$ipArray)){
+            $articleModel = new Article();
+            $articleModel->updateViewCount($id);
+            $ipArray[] = $ip;
+            Cache::set('ipArray',$ipArray);
+            Cache::rm('article_info');
+        }
+
     }
 
 }

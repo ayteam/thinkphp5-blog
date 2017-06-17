@@ -34,7 +34,12 @@
 
 <script src="/static/jquery-2.1.1.js"></script>
 <script src="/static/build/js/app-2096d902af.js"></script>
-
+<script>
+    //清除模态框数据，解决只加载一次的问题
+    $(".modal").on("hidden.bs.modal", function() {
+        $(this).removeData();
+    });
+</script>
 {block name="script"}{/block}
 </body>
 </html>

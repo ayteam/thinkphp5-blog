@@ -44,13 +44,13 @@
 
                                    <span class="label label-sm label-primary"> 已启用 </span>
                                     {else/}
-                                    <span class="label label-sm label-danger"> 已禁用 </span>
+                                    <span class="label label-sm label-warning"> 已禁用 </span>
                                     {/if}
                                 </td>
                                 <td>
                                     {if condition="$comment.status ==1"}
                                     <button type="submit"
-                                            class="btn btn-danger"
+                                            class="btn btn-warning"
                                             onclick="isOpen('/admin/comment/isOpen?status=2&id={$comment.id}'); return false;"
                                             data-toggle="tooltip"
                                             data-placement="top"

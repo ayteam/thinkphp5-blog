@@ -1,6 +1,5 @@
 {extend name="app" /}
 {block name="title"}博客{/block}
-{block name="title"}博客{/block}
 {block name="content"}
 <div class="container">
     <div class="row">
@@ -13,19 +12,19 @@
                 <!-- post header -->
                 <div class="post-header">
                     <h1 class="post-title">
-                        <a title="{$article.title}" href="{{ route('post.show',$article->slug) }}">{$article.title}</a>
+                        <a title="{$article.title}" href="/article/info/{$article.id}">{$article.title}</a>
                     </h1>
                     <div class="post-meta">
                            <span class="post-time">
                            <i class="fa fa-calendar-o"></i>
                            <time datetime="2016-08-05T00:10:14+08:00">
-                           {$article.create_date}
+                           {$article.create_at}
                            </time>
                            </span>
                         <span class="post-category">
                            &nbsp;|&nbsp;
                            <i class="fa fa-folder-o"></i>
-                           <a href="{{ route('category.show',$article->category->name) }}">
+                           <a href="/category/{$article.category_id}">
                            {$article.category_name}
                            </a>
                            </span>
@@ -43,7 +42,7 @@
 
                 </div>
                 <div class="post-permalink">
-                    <a title="阅读全文" href="{{ route('post.show',$article->slug) }}" class="btn btn-more">阅读全文</a>
+                    <a title="阅读全文" href="/article/info/{$article.id}" class="btn btn-more">阅读全文</a>
                 </div>
                 <div class="post-footer clearfix">
                     <div class="pull-left tag-list">

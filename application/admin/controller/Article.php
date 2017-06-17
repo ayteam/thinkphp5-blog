@@ -31,8 +31,6 @@ class Article extends Base
         $articles = $this->articleModel->search();
         $page = $articles->render();
         $articles = $articles->toArray();
-//        dump($articles);die;
-
         return view('index',['articles'=>$articles,'page'=>$page]);
     }
 
@@ -44,7 +42,7 @@ class Article extends Base
         $categorys = $this->categoryModel->queryForList();
         $tags = $this->tagModel->queryForList();
 
-        return view('create',['categorys'=>$categorys,'tags'=>$tags]);
+        return view('add',['categorys'=>$categorys,'tags'=>$tags]);
     }
 
     /**
@@ -92,7 +90,8 @@ class Article extends Base
         $article = $this->articleModel->queryForObject(array(['id','=',$id]));
         $categorys = $this->categoryModel->queryForList();
         $tags = $this->tagModel->queryForList();
-        return view('edit',['categorys'=>$categorys,'tags'=>$tags,'article'=>$article]);
+        $articleTags = $this->tagModel->queryForList(array(['id','in',$article['tag_id']]));
+        return view('edit',['categorys'=>$categorys,'tags'=>$tags,'article'=>$article,'articleTags'=>$articleTags]);
     }
 
     /**
@@ -145,6 +144,32 @@ class Article extends Base
             return json(['status'=>1]);
         }
         return json(['status'=>2]);
+    }
+
+    public function download()
+    {
+        $request = Request::instance();
+        $id = $request->param('id');
+        $article = $this->articleModel->searchById($id);
+
+        $articleTags = $this->tagModel->queryForList(array(['id','in',$article['tag_id']]));
+        $info = "title: " . $article['title'];
+        $info = $info . "\ndate: " . $article['create_at'];
+        $info = $info . "\ncategory: " . $article['category_name'];
+        $info = $info . "\ntags:\n";
+
+        foreach ($articleTags as $tag) {
+            $info = $info . "- $tag[tag_name]\n";
+        }
+        $info = $info . "---\n\n" . $article['content'];
+
+        return response($info, 200,
+            [
+                "Content-Type" => 'application/force-download',
+                'Content-Disposition' => "attachment; filename=\"" . $article['title'] . ".md\""
+            ]
+        );
+
     }
 
 

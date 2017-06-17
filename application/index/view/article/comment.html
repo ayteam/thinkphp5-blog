@@ -1,0 +1,114 @@
+<div class="comment">
+    <div class="comment-body">
+        <div id="comments-container-vue" data-api-url="/comment/index/{$article.id}">
+
+        </div>
+        <form id="comment-form" method="post" action="/index/comment/update">
+
+            <input type="hidden" name="article_id" value="{$article.id}">
+
+            <?php
+               if(!session('?user')){
+           ?>
+
+                <div class="form-group">
+                    <label for="username">姓名<span class="required">*</span></label>
+                    <input class="form-control" id="username" type="text" name="username" placeholder="您的大名">
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱<span class="required">*</span></label>
+                    <input class="form-control" id="email" type="email" name="email" placeholder="邮箱不会公开">
+                </div>
+                <div class="form-group">
+                    <label for="site">个人网站</label>
+                    <input class="form-control" id="site" type="text" name="site" placeholder="可选，填写后点击头像可以直接进入">
+                </div>
+            <?php
+               }
+           ?>
+            <div class="form-group">
+                <label for="comment-content">评论内容<span class="required">*</span></label>
+                <textarea placeholder="支持Markdown" style="resize: vertical" id="comment-content" name="content"
+                          rows="5" spellcheck="false" class="form-control markdown-content autosize-target"></textarea>
+                <span class="help-block required">
+                    <strong id="comment_error_msg"></strong>
+                </span>
+            </div>
+            <div class="form-group">
+                <input type="button" id="comment-submit" class="btn btn-primary"
+                       value="回复"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var articleId = '{$article.id}';
+
+    window.onload = function () {
+       // console.log(articleId)
+        ajax();
+    }
+    function ajax() {
+        var obj=new XMLHttpRequest();  // XMLHttpRequest对象用于在后台与服务器交换数据
+        obj.open('GET','/comment/index/'+articleId,true);
+        obj.onreadystatechange=function(){
+            if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState==4说明请求已完成
+                // fn.call(this, obj.responseText);  //从服务器获得数据
+                 console.log(obj.responseText)
+
+                document.getElementById('comments-container-vue').innerHTML = obj.responseText;
+            }
+        };
+        obj.send(null);
+    }
+
+    $('#comment-submit').on('click',function () {
+        var e = $("#comment-form"),
+            t = e.find("#comment-submit"),
+            n = e.find("#comment-content"),
+            i = e.find("input[name=username]"),
+            r = e.find("input[name=email]");
+        if (i.length > 0) {
+            if ("" == $.trim(i.val())) return i.focus(), !1;
+            if ("" == $.trim(r.val())) return r.focus(), !1
+        }
+        if ("" == $.trim(n.val())) return n.focus(), !1;
+
+        t.val("提交中...").addClass("disabled").prop("disabled", !0);
+        $.ajax({
+            method: "post",
+            url: e.attr("action"),
+            data: {
+                commentable_type: e.find("input[name=commentable_type]").val(),
+                content: n.val(),
+                user_name: i.val(),
+                email:  r.val(),
+                article_id:articleId
+            },
+            success:function (data) {
+                console.log(data)
+                ajax();
+                t.val("回复").removeClass("disabled").prop("disabled", !1)
+            }
+        })
+
+    })
+
+
+    function replySomeone(e) {
+        var t = $("#comment-content"),
+            n = t.val();
+        prefix = "@" + e + " ";
+        var i = "";
+        i = n.length > 0 ? n + "\n" + prefix : prefix, t.focus(), t.val(i), moveEnd(t)
+    }
+    var moveEnd = function(e) {
+        e.focus();
+        var t = void 0 === e.value ? 0 : e.value.length;
+        if (document.selection) {
+            var n = e.createTextRange();
+            n.moveStart("character", t), n.collapse(), n.select()
+        } else "number" == typeof e.selectionStart && "number" == typeof e.selectionEnd && (e.selectionStart = e.selectionEnd = t)
+    };
+
+</script>

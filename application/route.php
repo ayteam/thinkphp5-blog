@@ -21,9 +21,21 @@ use think\Route;
 //
 //];
 Route::rule('index/category/:id','index/Category/index','get');
+Route::rule('index/search','index/index/search','get');
 Route::rule('login','index/Login/index','get');
+Route::rule('register','index/Login/register','get');
 Route::rule('user/:id','index/User/index','get');
+Route::rule('article/info/:id','index/Article/info','get');
+Route::rule('article/info/:id','index/Article/info','post');
+Route::rule('comment/index/:id','index/Comment/index','get');
+
 
 //----------------------admin---------------------------
 Route::rule('admin/article/edit/:id','admin/Article/edit','get');
 Route::rule('admin/article/doEdit/:id','admin/Article/doEdit','post');
+
+Route::rule('admin/tag/del/:id','admin/Tag/del','get');
+
+Route::rule('admin/category/del/:id','admin/category/del','get');
+Route::rule('admin/category/edit/:id','admin/category/edit','get');
+Route::rule('admin/image/del/:id','admin/image/del','get');

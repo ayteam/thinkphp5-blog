@@ -1,0 +1,36 @@
+
+{empty name="comments"}
+<p class="meta-item center-block">暂无评论~~</p>
+{else /}
+{foreach name="comments" item="comment" key="k" }
+<div class="comment-wrap" v-for="comment in comments">
+    <div class="pull-left">
+        <a name="comment{$k + 1}" href="{{ $href }}">
+            <img width="40px" height="40px" class="img-circle"
+                 src="{{ $imgSrc }}">
+        </a>
+    </div>
+    <div class="comment-info">
+        <div class="comment-head">
+                <span class="name">
+                    <a href="">{$comment.user_name}</a>
+                    <?php if(isAdmin($comment['user_id'])){ ?>
+                    <label class="role-label">博主</label>
+                    <?php } ?>
+                </span>
+            <span class="comment-operation pull-right">
+                    <a title="回复" href="javascript:void (0);" onclick="replySomeone('{$comment.user_name}')">
+                        <i class="fa fa-reply fa-fw"></i>
+                    </a>
+            </span>
+        </div>
+        <div class="comment-time">
+            <span>{$comment.create_at}</span>
+        </div>
+        <div class="markdown-content">
+            {$comment.html_content}
+        </div>
+    </div>
+</div>
+{/foreach}
+{/empty}

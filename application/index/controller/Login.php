@@ -56,7 +56,17 @@ class Login
                 Session::set('user',$user);
             }
         }
-        return json($data);
+       // return json($data);
+        return redirect('/');
+    }
+
+    public function logout(){
+        Session::clear();
+        return redirect('/');
+    }
+
+    public function register(){
+        return view('register');
     }
 
 }

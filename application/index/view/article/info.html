@@ -1,0 +1,132 @@
+
+{extend name="app" /}
+{block name="title"}博客{/block}
+{block name="description"}{$article.description}{/block}
+{block name="keywords"}{$article.category_name}{/block}
+{block name="content"}
+    <div class="container">
+        <div id="post-detail-wrap" class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 phone-no-padding">
+                <div class="post-detail">
+                    <div class="center-block">
+                        <div class="post-detail-title">{$article.title}</div>
+                        <div class="post-meta">
+                            <span class="post-category">
+                           <i class="fa fa-folder-o fa-fw"></i>
+                           <a href="/category/ {$article.category_id}">
+                           {$article.category_name}
+                           </a>
+                           </span>
+                            <span class="post-comments-count">
+                           &nbsp;|&nbsp;
+                           <i class="fa fa-comments-o fa-fw" aria-hidden="true"></i>
+                           <span> {$article.comment_count}</span>
+                           </span>
+                            <span>
+                           &nbsp;|&nbsp;
+                           <i class="fa fa-eye"></i>
+                           <span>{$article.view_count}</span>
+                           </span>
+                            <?php if($article['user_id'] == session('user')['id'] ){ ?>
+                            <span>
+                                    &nbsp;|&nbsp;
+                                    <a href="/admin/article/edit/{$article.id}">
+                                        <i class="fa fa-pencil fa-fw"></i>
+                                    </a>
+                                </span>
+                            <span>
+                                    &nbsp;|&nbsp;
+                                    <a role="button"
+                                       data-url="/admin/article/del/{$article.id}"
+                                       data-modal-target="{{ $post->title }}">
+                                    <i class="fa fa-trash-o fa-fw"></i>
+                                    </a>
+                                </span>
+                            <?php }?>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="post-detail-content">
+                        {$article.html_content}
+                        <br>
+                        <p>
+                            -- END
+                        </p>
+                    </div>
+                    <div class="post-info-panel">
+                        <p class="info">
+                            <label class="info-title">版权声明:</label><i class="fa fa-fw fa-creative-commons"></i>自由转载-非商用-非衍生-保持署名（<a
+                                    href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）
+                        </p>
+                        <p class="info">
+                            <label class="info-title">最新日期:</label>{$article.create_at}
+                        </p>
+
+                        <p class="info">
+                            <label class="info-title">文章标签:</label>
+                            {foreach $tags as $tag}
+                                <a class="tag" href="javascript:">{$tag.tag_name}</a>
+                            {/foreach}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="row">
+                <div id="comment-wrap" class="col-md-8 col-md-offset-2 col-sm-12 phone-no-padding">
+                    {include file="../application/index/view/article/comment.html"}
+                </div>
+            </div>
+    </div>
+{block name="script"}
+<script>
+    function initMarkdownTarget() {
+        $(".markdown-target").each(function(e, t) {
+            t.innerHTML = marked($(t).data("markdown"), {
+                renderer: new marked.Renderer,
+                gfm: !0,
+                tables: !0,
+                breaks: !1,
+                pedantic: !1,
+                smartLists: !0,
+                smartypants: !1
+            })
+        })
+    }
+    function highLightCode() {
+        $("pre code").each(function(e, t) {
+            hljs.highlightBlock(t)
+        })
+    }
+    function initTables() {
+        $("table").addClass("table table-bordered table-responsive")
+    }
+    function autoSize() {
+        autosize($(".autosize-target"))
+    }
+    function imageLiquid() {
+        $(".js-imgLiquid").imgLiquid({
+            fill: !0,
+            horizontalAlign: "center",
+            verticalAlign: "top"
+        })
+    }
+    var Xblog = {
+        init: function() {
+            this.bootUp()
+        },
+        bootUp: function() {
+            initMarkdownTarget(), initTables(), autoSize(), highLightCode(), imageLiquid()
+        }
+    };
+    $(document).ready(function() {
+        Xblog.init()
+    });
+
+</script>
+
+{/block}
+
+{/block}

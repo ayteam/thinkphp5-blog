@@ -239,4 +239,13 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    'oss_access_id'=>'LTAIv0DDJ0y7aDd7',
+    'oss_access_key'=>'OKa8eW8hcJGkErgwkxuvWHynWdmCIx',
+    'oss_endpoint'=>'http://oss-cn-hangzhou.aliyuncs.com',
+    'oss_bucket'=>'yuan-demo',
+     'oss_url'=>'http://yuan-demo.oss-cn-hangzhou.aliyuncs.com', // 前台 oss url
+    'oss_server' => 'http://oss-cn-hangzhou.aliyuncs.com', // 外网
+    'oss_server_internal' => 'http://oss-cn-hangzhou-internal.aliyuncs.com', //内网
+    'is_oss_server'=>false,  // 内外网切换  false= 外网   true=内网
+
 ];

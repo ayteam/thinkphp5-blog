@@ -31,8 +31,8 @@ class BaseModel extends Model
      * 纯sql查询
      * @return mixed
      */
-    public function queryForSql($sql){
-        return Db::query($sql);
+    public function queryForSql($sql,array $bind=array()){
+        return Db::query($sql,$bind);
     }
 
     /**

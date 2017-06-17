@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-06-03 20:55:59
+Date: 2017-06-17 22:23:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `categories` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `categories_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of categories
@@ -38,6 +38,7 @@ INSERT INTO `categories` VALUES ('4', '2017-01-14 09:24:52', '2017-01-14 09:24:5
 INSERT INTO `categories` VALUES ('5', '2017-01-14 09:24:52', '2017-01-14 09:24:52', 'Laravel');
 INSERT INTO `categories` VALUES ('6', '2017-01-14 09:24:52', '2017-01-14 09:24:52', 'Vue');
 INSERT INTO `categories` VALUES ('7', '2017-01-14 09:24:52', '2017-01-14 09:24:52', 'Js');
+INSERT INTO `categories` VALUES ('8', '2017-06-06 21:09:57', '2017-06-06 21:09:57', 'rqwer');
 
 -- ----------------------------
 -- Table structure for comments
@@ -60,13 +61,21 @@ CREATE TABLE `comments` (
   KEY `comments_user_id_index` (`user_id`),
   KEY `comments_commentable_id_index` (`commentable_id`),
   KEY `comments_commentable_type_index` (`commentable_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of comments
 -- ----------------------------
 INSERT INTO `comments` VALUES ('1', '1', '37', '评论', '<p>评论</p>', 'App\\Post', 'Justen Fisher', 'collier.fredrick@example.net', null, '2017-01-14 09:51:22', '2017-01-14 09:51:22', null);
 INSERT INTO `comments` VALUES ('2', '1', '37', '评论2', '<p>评论2</p>', 'App\\Post', 'Justen Fisher', 'collier.fredrick@example.net', null, '2017-01-14 09:51:31', '2017-01-14 09:51:31', null);
+INSERT INTO `comments` VALUES ('3', '1', '40', 'gdfsgafdgf', '<p>gdfsgafdgf</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:06:18', '2017-06-13 10:06:18', null);
+INSERT INTO `comments` VALUES ('4', '1', '40', 'dadf', '<p>dadf</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:06:21', '2017-06-13 10:06:21', null);
+INSERT INTO `comments` VALUES ('5', '1', '40', 'fasdfds', '<p>fasdfds</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:06:24', '2017-06-13 10:06:24', null);
+INSERT INTO `comments` VALUES ('6', '1', '40', 'fdasfd', '<p>fdasfd</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:06:26', '2017-06-13 10:06:26', null);
+INSERT INTO `comments` VALUES ('7', '1', '40', 'asdfd', '<p>asdfd</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:14:19', '2017-06-13 10:14:19', null);
+INSERT INTO `comments` VALUES ('8', '1', '40', 'gsdfg', '<p>gsdfg</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:17:58', '2017-06-13 10:17:58', null);
+INSERT INTO `comments` VALUES ('9', '1', '40', 'ddd', '<p>ddd</p>', 'App\\Post', 'liu', '1662853651@163.com', null, '2017-06-13 10:30:29', '2017-06-13 10:30:29', null);
+INSERT INTO `comments` VALUES ('10', null, '40', '[@liu](http://www.blog.com/user/liu) ddd', '<p><a href=\"http://www.blog.com/user/liu\">@liu</a> ddd</p>', 'App\\Post', '33', 'undefined@qq.com', null, '2017-06-15 21:49:45', '2017-06-15 21:49:45', 'undefined');
 
 -- ----------------------------
 -- Table structure for configurations
@@ -201,6 +210,8 @@ CREATE TABLE `notifications` (
 -- ----------------------------
 -- Records of notifications
 -- ----------------------------
+INSERT INTO `notifications` VALUES ('b26ea0bf-6c78-45a0-b755-7b77e7f12ee5', 'App\\Notifications\\ReceivedComment', '1', 'App\\User', '{\"id\":10,\"user_id\":null,\"commentable_id\":40,\"content\":\"[@liu](http:\\/\\/www.blog.com\\/user\\/liu) ddd\",\"html_content\":\"<p><a href=\\\"http:\\/\\/www.blog.com\\/user\\/liu\\\">@liu<\\/a> ddd<\\/p>\",\"commentable_type\":\"App\\\\Post\",\"username\":\"33\",\"email\":\"undefined@qq.com\",\"deleted_at\":null,\"created_at\":\"2017-06-15 21:49:45\",\"updated_at\":\"2017-06-15 21:49:45\",\"site\":\"undefined\"}', '2017-06-17 21:52:20', '2017-06-15 21:49:45', '2017-06-17 21:52:20');
+INSERT INTO `notifications` VALUES ('f7f740a6-d904-4cc1-927e-64640a43ff20', 'App\\Notifications\\MentionedInComment', '1', 'App\\User', '{\"id\":10,\"user_id\":null,\"commentable_id\":40,\"content\":\"[@liu](http:\\/\\/www.blog.com\\/user\\/liu) ddd\",\"html_content\":\"<p><a href=\\\"http:\\/\\/www.blog.com\\/user\\/liu\\\">@liu<\\/a> ddd<\\/p>\",\"commentable_type\":\"App\\\\Post\",\"username\":\"33\",\"email\":\"undefined@qq.com\",\"deleted_at\":null,\"created_at\":\"2017-06-15 21:49:45\",\"updated_at\":\"2017-06-15 21:49:45\",\"site\":\"undefined\"}', '2017-06-17 21:52:20', '2017-06-15 21:49:45', '2017-06-17 21:52:20');
 
 -- ----------------------------
 -- Table structure for pages
@@ -289,10 +300,10 @@ INSERT INTO `posts` VALUES ('18', '6', '2', 'Maiores similique fugit aut veniam.
 INSERT INTO `posts` VALUES ('19', '6', '2', 'Doloremque et fuga est incidunt itaque autem aut sit laudantium.', 'Magnam quod optio mollitia ex delectus aliquid nihil provident officia perferendis consequuntur voluptates.', 'ipsam-enim-distinctio-aspernatur-ut-quod-nostrum-totam-non', 'Magni voluptatibus enim tempora rerum eaque dolorum. Qui ut cupiditate excepturi. Exercitationem repudiandae et magni delectus aliquid odio consequatur.\n\nNulla saepe expedita et. Beatae modi id similique maxime sed non ipsa. Dignissimos aut non quia et aliquid perspiciatis eum. Veritatis ea qui consectetur ut magni sint.\n\nHic et mollitia magni nisi reprehenderit qui sed aut. Neque et recusandae eos voluptatem. Dolorem architecto non dolore blanditiis.\n\nQuam sequi autem tempore voluptatem ad laudantium. Id molestiae eaque enim ex at modi. Distinctio nesciunt aut animi nihil. Nihil eius quas perspiciatis dolore et ut. Maiores recusandae laborum aspernatur nam.\n\nAut enim sit facilis nam quibusdam. Velit qui amet itaque cupiditate natus esse et. Cupiditate non nemo non autem. Magni sunt ipsa suscipit debitis atque iusto dolores quas.\n\nRem unde molestiae ipsum voluptas harum iusto sequi minima. Quia nisi vero voluptatibus qui aut et voluptas et. Assumenda ipsum voluptas non omnis facere. Deleniti aut optio deserunt. Voluptatibus explicabo qui impedit vel et.\n\nDistinctio voluptatibus consequatur laboriosam qui nostrum. Deleniti rem labore veniam eum reprehenderit. Velit voluptas dolore alias quia iure blanditiis ab. Et blanditiis sit eius aut.\n\nAutem corporis aspernatur qui aut mollitia. Numquam architecto qui minima fugit. Sit et consectetur rerum omnis. Pariatur assumenda nisi dolores qui explicabo necessitatibus.\n\nSequi laudantium debitis molestiae itaque et laborum modi cumque. Dolores et nobis placeat quae non aut nulla. Quisquam dolorem quidem earum. Qui consequatur recusandae necessitatibus. Consequuntur sunt ratione consequatur nesciunt non dolor.\n\nQuo expedita et tempore suscipit aut nostrum reprehenderit cumque. Sit voluptas doloremque quae. Tempore et quia ut autem. Ex dolores ullam ab accusantium inventore.\n\nExpedita odit blanditiis consectetur dolor. Sint beatae maxime sunt illum. Quia sit atque eum soluta omnis. Ipsa sit veritatis quia qui quia dicta.\n\nQui odio eum animi. Labore non corporis hic. Provident voluptatem minima corporis autem necessitatibus provident. Ut ut ea quia tempore saepe quis id.\n\nCorrupti debitis labore sit commodi. Cumque voluptas sunt numquam soluta. Sapiente quaerat ullam quia tenetur praesentium aut. Aliquam facilis qui id officiis minus non. Provident exercitationem blanditiis quibusdam nisi facilis suscipit.\n\nVeniam at vel aut inventore. Architecto perspiciatis aspernatur minima et et animi praesentium.\n\nConsequatur maxime sit sapiente dolorem itaque repellendus velit. Sed libero dolorem sunt. Aut quasi voluptate at ea fuga sit et blanditiis.\n\nOdio quisquam non repellendus at id aut et vel. Non est natus facere sint animi consequatur iste fugit. Consequatur velit temporibus est exercitationem praesentium. Illo dolorem unde illo.\n\nId excepturi saepe nulla et officia et. Nesciunt at in aut qui perferendis incidunt. Perferendis facere labore soluta in.\n\nEligendi in cupiditate voluptatum inventore ea. In repellat a doloremque sed eos laudantium enim. Incidunt consectetur et omnis consequatur aut velit.', 'Magni voluptatibus enim tempora rerum eaque dolorum. Qui ut cupiditate excepturi. Exercitationem repudiandae et magni delectus aliquid odio consequatur.\n\nNulla saepe expedita et. Beatae modi id similique maxime sed non ipsa. Dignissimos aut non quia et aliquid perspiciatis eum. Veritatis ea qui consectetur ut magni sint.\n\nHic et mollitia magni nisi reprehenderit qui sed aut. Neque et recusandae eos voluptatem. Dolorem architecto non dolore blanditiis.\n\nQuam sequi autem tempore voluptatem ad laudantium. Id molestiae eaque enim ex at modi. Distinctio nesciunt aut animi nihil. Nihil eius quas perspiciatis dolore et ut. Maiores recusandae laborum aspernatur nam.\n\nAut enim sit facilis nam quibusdam. Velit qui amet itaque cupiditate natus esse et. Cupiditate non nemo non autem. Magni sunt ipsa suscipit debitis atque iusto dolores quas.\n\nRem unde molestiae ipsum voluptas harum iusto sequi minima. Quia nisi vero voluptatibus qui aut et voluptas et. Assumenda ipsum voluptas non omnis facere. Deleniti aut optio deserunt. Voluptatibus explicabo qui impedit vel et.\n\nDistinctio voluptatibus consequatur laboriosam qui nostrum. Deleniti rem labore veniam eum reprehenderit. Velit voluptas dolore alias quia iure blanditiis ab. Et blanditiis sit eius aut.\n\nAutem corporis aspernatur qui aut mollitia. Numquam architecto qui minima fugit. Sit et consectetur rerum omnis. Pariatur assumenda nisi dolores qui explicabo necessitatibus.\n\nSequi laudantium debitis molestiae itaque et laborum modi cumque. Dolores et nobis placeat quae non aut nulla. Quisquam dolorem quidem earum. Qui consequatur recusandae necessitatibus. Consequuntur sunt ratione consequatur nesciunt non dolor.\n\nQuo expedita et tempore suscipit aut nostrum reprehenderit cumque. Sit voluptas doloremque quae. Tempore et quia ut autem. Ex dolores ullam ab accusantium inventore.\n\nExpedita odit blanditiis consectetur dolor. Sint beatae maxime sunt illum. Quia sit atque eum soluta omnis. Ipsa sit veritatis quia qui quia dicta.\n\nQui odio eum animi. Labore non corporis hic. Provident voluptatem minima corporis autem necessitatibus provident. Ut ut ea quia tempore saepe quis id.\n\nCorrupti debitis labore sit commodi. Cumque voluptas sunt numquam soluta. Sapiente quaerat ullam quia tenetur praesentium aut. Aliquam facilis qui id officiis minus non. Provident exercitationem blanditiis quibusdam nisi facilis suscipit.\n\nVeniam at vel aut inventore. Architecto perspiciatis aspernatur minima et et animi praesentium.\n\nConsequatur maxime sit sapiente dolorem itaque repellendus velit. Sed libero dolorem sunt. Aut quasi voluptate at ea fuga sit et blanditiis.\n\nOdio quisquam non repellendus at id aut et vel. Non est natus facere sint animi consequatur iste fugit. Consequatur velit temporibus est exercitationem praesentium. Illo dolorem unde illo.\n\nId excepturi saepe nulla et officia et. Nesciunt at in aut qui perferendis incidunt. Perferendis facere labore soluta in.\n\nEligendi in cupiditate voluptatum inventore ea. In repellat a doloremque sed eos laudantium enim. Incidunt consectetur et omnis consequatur aut velit.', '1', '0', '2017-01-14 09:24:53', '2017-01-14 09:24:53', '2007-03-13 17:09:39', null);
 INSERT INTO `posts` VALUES ('20', '6', '4', 'Velit iusto labore consequuntur ipsum aut velit quia.', 'Velit voluptas minima vel maxime quam hic id voluptatum ipsa doloribus possimus autem.', 'quo-odio-quisquam-sit-ea-magni-et-amet', 'Optio sed illo dolorem voluptates. Ratione asperiores possimus eos et explicabo tenetur corrupti exercitationem. Voluptas est architecto eveniet non fugit. Vitae aut in ex quia consequatur hic voluptas nihil. Molestiae laboriosam maiores est sapiente voluptatibus.\n\nSapiente distinctio ratione quia praesentium aut vel. Sed temporibus repudiandae vel facere rerum temporibus perspiciatis.\n\nEst voluptas eum rerum et molestiae ducimus dignissimos dolorem. Velit similique fugit adipisci.\n\nSit iure inventore aperiam dolor. Sunt ratione autem veritatis dicta ipsa. Non cum consequatur mollitia aut.\n\nVoluptatem sapiente sunt voluptas repellat a. Dolorem dolor non repellendus omnis. Commodi inventore nihil recusandae nemo nostrum nulla. Maiores dignissimos rerum qui necessitatibus enim et eum.\n\nLaborum pariatur sed nobis maxime voluptatibus voluptas porro aut. Illo reiciendis nihil qui atque aut totam voluptatibus eum. Et enim labore minus dolores possimus.\n\nNeque corrupti porro et necessitatibus. Ut ea voluptatem perferendis est aperiam corporis praesentium.\n\nVelit ea molestiae cupiditate repudiandae vel. Quos qui deserunt sint voluptatem incidunt.\n\nEos atque voluptatem animi sunt iste. Nisi sapiente minima error laboriosam aut. Placeat cum aperiam est quia recusandae incidunt modi. Error perspiciatis et excepturi praesentium consequatur deserunt veniam.\n\nCupiditate aliquam natus incidunt et et doloremque. Similique debitis iusto unde et dolore suscipit eligendi. Dicta mollitia debitis nobis nobis voluptas. Itaque consequatur et voluptate reprehenderit.\n\nOfficiis modi vero voluptate nihil quia natus sequi. Aut laudantium sit dolorem dolorem. Dolorem ex quibusdam nostrum tempora.\n\nOdit deleniti et libero libero sapiente et debitis. Voluptatum veritatis quam tempore est. Sit ut optio cum modi dolorum ut eum. Hic est maxime enim a in quia aut.\n\nAut eius quo voluptas. In id vitae aliquam. Nihil iusto et harum eius maiores sint.\n\nQui nesciunt optio neque minima eum expedita magnam. Perferendis similique aut eos recusandae. Nam vel culpa voluptatum eum.', 'Optio sed illo dolorem voluptates. Ratione asperiores possimus eos et explicabo tenetur corrupti exercitationem. Voluptas est architecto eveniet non fugit. Vitae aut in ex quia consequatur hic voluptas nihil. Molestiae laboriosam maiores est sapiente voluptatibus.\n\nSapiente distinctio ratione quia praesentium aut vel. Sed temporibus repudiandae vel facere rerum temporibus perspiciatis.\n\nEst voluptas eum rerum et molestiae ducimus dignissimos dolorem. Velit similique fugit adipisci.\n\nSit iure inventore aperiam dolor. Sunt ratione autem veritatis dicta ipsa. Non cum consequatur mollitia aut.\n\nVoluptatem sapiente sunt voluptas repellat a. Dolorem dolor non repellendus omnis. Commodi inventore nihil recusandae nemo nostrum nulla. Maiores dignissimos rerum qui necessitatibus enim et eum.\n\nLaborum pariatur sed nobis maxime voluptatibus voluptas porro aut. Illo reiciendis nihil qui atque aut totam voluptatibus eum. Et enim labore minus dolores possimus.\n\nNeque corrupti porro et necessitatibus. Ut ea voluptatem perferendis est aperiam corporis praesentium.\n\nVelit ea molestiae cupiditate repudiandae vel. Quos qui deserunt sint voluptatem incidunt.\n\nEos atque voluptatem animi sunt iste. Nisi sapiente minima error laboriosam aut. Placeat cum aperiam est quia recusandae incidunt modi. Error perspiciatis et excepturi praesentium consequatur deserunt veniam.\n\nCupiditate aliquam natus incidunt et et doloremque. Similique debitis iusto unde et dolore suscipit eligendi. Dicta mollitia debitis nobis nobis voluptas. Itaque consequatur et voluptate reprehenderit.\n\nOfficiis modi vero voluptate nihil quia natus sequi. Aut laudantium sit dolorem dolorem. Dolorem ex quibusdam nostrum tempora.\n\nOdit deleniti et libero libero sapiente et debitis. Voluptatum veritatis quam tempore est. Sit ut optio cum modi dolorum ut eum. Hic est maxime enim a in quia aut.\n\nAut eius quo voluptas. In id vitae aliquam. Nihil iusto et harum eius maiores sint.\n\nQui nesciunt optio neque minima eum expedita magnam. Perferendis similique aut eos recusandae. Nam vel culpa voluptatum eum.', '1', '0', '2017-01-14 09:24:53', '2017-01-14 09:24:53', '2008-07-12 12:15:45', null);
 INSERT INTO `posts` VALUES ('36', '10', '7', 'Quisquam voluptas sunt incidunt id maiores qui eligendi repellendus.', 'Consequatur facilis excepturi omnis similique esse.', 'sit-est-sint-ipsa-minima-sit-vitae', 'Et ut id alias repellendus illum voluptas aut. Totam minima perferendis eaque voluptatem iure. Recusandae ut rerum quia.\n\nAperiam porro ab nesciunt similique doloribus. Fuga vitae et beatae odit deserunt et. Nulla omnis repellat libero aut consequuntur id.\n\nExplicabo sapiente voluptas dicta ea quia commodi. Suscipit numquam laborum laboriosam molestiae. Ut voluptatem eum corrupti nisi qui nisi. Et velit molestias et neque autem atque ipsum.\n\nSequi accusamus animi ullam optio officia. Temporibus rem error temporibus omnis in. Veritatis in nostrum tempora cupiditate.\n\nDoloribus reiciendis pariatur nihil. Sequi earum omnis incidunt placeat.\n\nAdipisci ducimus beatae nihil aut omnis nostrum. Ipsum adipisci ea deleniti quis nulla ut. Animi aspernatur in quae natus impedit eos aspernatur. Qui earum quia inventore et dicta voluptas.\n\nEt nobis animi voluptatum sint rem aspernatur tempore voluptatem. Voluptatem inventore delectus quasi et minus. Facilis molestias voluptate asperiores consequatur. Id occaecati ad amet vero.\n\nDeserunt autem eos iure repellendus voluptatum deserunt in voluptas. Iste deserunt reprehenderit quos ea velit laborum. Eos doloribus dolore magni cum quo.\n\nVitae alias quisquam porro nemo fuga. Asperiores fugit commodi consequuntur.\n\nDeleniti molestiae aut cum laborum nisi nulla et. Amet ut nesciunt dolor ea. In dolorum architecto et enim.', 'Et ut id alias repellendus illum voluptas aut. Totam minima perferendis eaque voluptatem iure. Recusandae ut rerum quia.\n\nAperiam porro ab nesciunt similique doloribus. Fuga vitae et beatae odit deserunt et. Nulla omnis repellat libero aut consequuntur id.\n\nExplicabo sapiente voluptas dicta ea quia commodi. Suscipit numquam laborum laboriosam molestiae. Ut voluptatem eum corrupti nisi qui nisi. Et velit molestias et neque autem atque ipsum.\n\nSequi accusamus animi ullam optio officia. Temporibus rem error temporibus omnis in. Veritatis in nostrum tempora cupiditate.\n\nDoloribus reiciendis pariatur nihil. Sequi earum omnis incidunt placeat.\n\nAdipisci ducimus beatae nihil aut omnis nostrum. Ipsum adipisci ea deleniti quis nulla ut. Animi aspernatur in quae natus impedit eos aspernatur. Qui earum quia inventore et dicta voluptas.\n\nEt nobis animi voluptatum sint rem aspernatur tempore voluptatem. Voluptatem inventore delectus quasi et minus. Facilis molestias voluptate asperiores consequatur. Id occaecati ad amet vero.\n\nDeserunt autem eos iure repellendus voluptatum deserunt in voluptas. Iste deserunt reprehenderit quos ea velit laborum. Eos doloribus dolore magni cum quo.\n\nVitae alias quisquam porro nemo fuga. Asperiores fugit commodi consequuntur.\n\nDeleniti molestiae aut cum laborum nisi nulla et. Amet ut nesciunt dolor ea. In dolorum architecto et enim.', '1', '0', '2017-01-14 09:24:53', '2017-01-14 09:24:53', '1999-06-03 18:58:51', null);
-INSERT INTO `posts` VALUES ('37', '1', '1', '测试标题一', '<h1>文章描述</h1>', '文章slug', '###怎么使用markdown\r\n>怎么发大发明买爱疯都是吗分码数的免费的撒范德萨发明的‘’马丁师傅马上免费的马萨飞马是免费的吗按什么', '<h3>怎么使用markdown</h3>\n<blockquote>\n<p>怎么发大发明买爱疯都是吗分码数的免费的撒范德萨发明的‘’马丁师傅马上免费的马萨飞马是免费的吗按什么</p>\n</blockquote>', '1', '0', '2017-01-14 09:46:24', '2017-01-14 09:48:11', '2017-01-14 09:48:11', null);
+INSERT INTO `posts` VALUES ('37', '1', '1', '测试标题一', '<h1>文章描述</h1>', '文章slug', '###怎么使用markdown\r\n>怎么发大发明买爱疯都是吗分码数的免费的撒范德萨发明的‘’马丁师傅马上免费的马萨飞马是免费的吗按什么', '<h3>怎么使用markdown</h3>\n<blockquote>\n<p>怎么发大发明买爱疯都是吗分码数的免费的撒范德萨发明的‘’马丁师傅马上免费的马萨飞马是免费的吗按什么</p>\n</blockquote>', '1', '2', '2017-01-14 09:46:24', '2017-06-09 22:22:08', '2017-01-14 09:48:11', null);
 INSERT INTO `posts` VALUES ('38', '1', '1', 'ceshi', '<p>ceshi</p>', 'cehi', '[](http://)##怎么使用markdown[](http://)##怎么使用markdown[](http://)##怎么使用markdown[](http://)##怎么使用markdown![](![](http://)http://)![](\r\n\r\n| Column 1 | Column 2 | Column 3 |![](http://)\r\n| -------- | -------- | -------- |\r\n| Text     | Text     | Text     |\r\n\r\nhttp://)', '<p><a href=\"http://\"></a>##怎么使用markdown<a href=\"http://\"></a>##怎么使用markdown<a href=\"http://\"></a>##怎么使用markdown<a href=\"http://\"></a>##怎么使用markdown<img src=\"![](http://)http://\" alt=\"\" />![](</p>\n<table>\n<thead>\n<tr>\n<th>Column 1</th>\n<th>Column 2</th>\n<th>Column 3</th>\n<th><img src=\"http://\" alt=\"\" /></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Text</td>\n<td>Text</td>\n<td>Text</td>\n</tr>\n</tbody>\n</table>\n<p>http://)</p>', '1', '0', '2017-02-01 10:48:27', '2017-02-01 10:48:27', '2017-02-01 10:48:27', null);
 INSERT INTO `posts` VALUES ('39', '1', '1', '333', '<p>333</p>', '333', '\r\n\r\n3333', '<p>3333</p>', '1', '0', '2017-02-01 14:41:10', '2017-02-01 14:41:10', '2017-02-01 14:41:10', null);
-INSERT INTO `posts` VALUES ('40', '1', '3', '标题', '<p>文章描述</p>', '订单', 'afasdf', '<p>afasdf</p>', '1', '0', '2017-06-03 20:15:37', '2017-06-03 20:15:37', '2017-06-03 20:15:37', null);
+INSERT INTO `posts` VALUES ('40', '1', '3', '标题', '<p>文章描述</p>', '订单', '\r\n\r\n| Column 1 | Column 2 | Column 3 |\r\n| -------- | -------- | -------- |\r\n| Text     | Text     | Text     |\r\n\r\nafasdf', '<table>\n<thead>\n<tr>\n<th>Column 1</th>\n<th>Column 2</th>\n<th>Column 3</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Text</td>\n<td>Text</td>\n<td>Text</td>\n</tr>\n</tbody>\n</table>\n<p>afasdf</p>', '1', '3', '2017-06-03 20:15:37', '2017-06-17 21:52:49', '2017-06-17 21:52:49', null);
 
 -- ----------------------------
 -- Table structure for post_tag
@@ -451,7 +462,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'liu', '1662853651@163.com', '$2y$10$1zZJHSTEpIeiGLDLAAOP7uQhIW8.rfl9ST051VA9YBZkgY6mZCiYq', 'web_form', null, null, '', '', '', '{\"github\":\"\",\"facebook\":\"4rte\",\"weibo\":\"\",\"twitter\":\"\"}', '', null, 'lnWTdIUIW7mUkcFWSLockFCNEbWWT6lUPpT5SX3IgaHx5WFgxpx1B6wLoo1u', '2017-05-28 15:01:55', '2017-05-30 21:24:07');
+INSERT INTO `users` VALUES ('1', 'liu', '1662853651@163.com', '$2y$10$1zZJHSTEpIeiGLDLAAOP7uQhIW8.rfl9ST051VA9YBZkgY6mZCiYq', 'web_form', null, null, '', '', '', '{\"github\":\"\",\"facebook\":\"4rte\",\"weibo\":\"\",\"twitter\":\"\"}', '', null, 'vF9mHsrXE8ol8vd3lw5ER2QIkBTdhGZ5xHOuhzBbbrjwZdlzzkyPnj6njrbp', '2017-05-28 15:01:55', '2017-06-09 22:22:03');
 INSERT INTO `users` VALUES ('2', 'Dr. Bette Braun', 'zakary53@example.com', '$2y$10$WvH08cY1V3Ap3hnGeHpVGuc1GWQd9ikw1x.WFReu3d0Dyq66NdNVi', 'web_form', null, null, null, null, null, null, null, null, 'BBiePHFIKz', '2017-01-14 09:24:52', '2017-01-14 09:24:52');
 INSERT INTO `users` VALUES ('3', 'Elvera Schultz', 'odibbert@example.net', '$2y$10$CWEBXithiLWTXMFIUX0SYuVzr6v.CkbZsPt1xbcERRDf2/ZPWYI4G', 'web_form', null, null, null, null, null, null, null, null, 'SoQGalhlIx', '2017-01-14 09:24:52', '2017-01-14 09:24:52');
 INSERT INTO `users` VALUES ('4', 'Frederic Schmidt', 'zgibson@example.net', '$2y$10$PyCgTGvm5uCHg/PnD3fhVuOgzfLz4QvXp/gtu2bwYI7MyK2pfwMZu', 'web_form', null, null, null, null, null, null, null, null, '0jjeFR8JTQ', '2017-01-14 09:24:52', '2017-01-14 09:24:52');
@@ -478,19 +489,19 @@ CREATE TABLE `xx_article` (
   `html_content` longtext COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT ' 1 已发表 2.禁止显示 -1删除',
   `view_count` int(10) unsigned NOT NULL DEFAULT '0',
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `published_at` int(11) unsigned NOT NULL DEFAULT '0',
   `deleted_at` int(11) unsigned NOT NULL DEFAULT '0',
   `tag_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '1,2,5',
   `comment_count` int(11) NOT NULL DEFAULT '0' COMMENT '评论数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of xx_article
 -- ----------------------------
-INSERT INTO `xx_article` VALUES ('1', '6', '4', '22', 'cto aut iste optio aperiam.', 'est-sunt-nesciunt-vel-dignissimos', '333', '44', '1', '0', '2017-01-14 09:24:52', '1982', '2017', '2,3', '0');
-INSERT INTO `xx_article` VALUES ('2', '6', '4', '22', 'm.', 'dolor-harum-et-et-maiores-aut-iste', '333', '44', '1', '0', '2017-01-14 09:24:52', '2005', '2017', '2,3', '0');
+INSERT INTO `xx_article` VALUES ('1', '6', '4', '22', 'cto aut iste optio aperiam.', 'est-sunt-nesciunt-vel-dignissimos', '333', '44', '2', '0', '2017-06-09 19:41:29', '1982', '2017', '2,3', '0');
+INSERT INTO `xx_article` VALUES ('2', '1', '4', '22', 'm.', 'dolor-harum-et-et-maiores-aut-iste', '333', '44', '-1', '0', '2017-06-13 09:09:51', '2005', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('3', '6', '4', '22', 'Dolorem cum dolores soluta culpa.', 'assumenda-excepturi-sunt-nisi', '333', '44', '1', '0', '2017-01-14 09:24:52', '1977', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('4', '6', '6', '22', 'Corrupti id delectus soluta aut qui consequuntur enim.', 'enim-sequi-iusto-quibusdam-dolores', '333', '44', '1', '0', '2017-01-14 09:24:52', '1996', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('5', '6', '6', '22', 'ab recusandae.', 'omnis-nisi-dicta-tempore-aut-qui-aut-voluptatem', '333', '44', '1', '0', '2017-01-14 09:24:52', '2015', '2017', '2,3', '0');
@@ -500,8 +511,8 @@ INSERT INTO `xx_article` VALUES ('8', '6', '6', '22', 'nis blanditiis.', 'est-iu
 INSERT INTO `xx_article` VALUES ('9', '6', '6', '22', 'Qui aperiam dolorum et sint atque aut.', 'ea-quia-impedit-rerum-delectus-architecto-voluptas', '333', '44', '1', '0', '2017-01-14 09:24:52', '1981', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('10', '6', '6', '22', 'eum officia.', 'officia-aliquam-officiis-maiores-iure-et-architecto-quo', '333', '44', '1', '0', '2017-01-14 09:24:52', '1977', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('27', '9', '3', '22', '', 'est-non-totam-architecto-animi-nobis', '333', '44', '1', '0', '2017-01-14 09:24:53', '2005', '2017', '2,3', '0');
-INSERT INTO `xx_article` VALUES ('28', '10', '7', '22', 'Laudantium saepe quis quas ut.', 'quo-dignissimos-rerum-temporibus-magnam-tempore-corrupti', '333', '44', '2', '0', '2017-06-01 21:18:37', '1996', '2017', '2,3', '0');
-INSERT INTO `xx_article` VALUES ('29', '10', '7', '22', 'Labore accusantium et provident error.', 'est-unde-quod-suscipit-alias-sunt', '333', '44', '2', '0', '2017-06-01 21:18:38', '2001', '2017', '2,3', '0');
+INSERT INTO `xx_article` VALUES ('28', '10', '7', '22', 'Laudantium saepe quis quas ut.', 'quo-dignissimos-rerum-temporibus-magnam-tempore-corrupti', '333', '44', '-1', '0', '2017-06-04 21:16:17', '1996', '2017', '2,3', '0');
+INSERT INTO `xx_article` VALUES ('29', '10', '7', '22', 'Labore accusantium et provident error.', 'est-unde-quod-suscipit-alias-sunt', '333', '44', '-1', '0', '2017-06-04 21:16:22', '2001', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('30', '10', '7', '22', 'orporis voluptates quis.', 'sed-eveniet-fugit-distinctio-cumque-eos', '333', '44', '1', '0', '2017-01-14 09:24:53', '2016', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('31', '10', '7', '22', 't alias ut.', 'voluptas-sit-dolore-molestiae-accusantium-accusantium-et', '333', '44', '1', '0', '2017-01-14 09:24:53', '1972', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('32', '10', '7', '22', 'ctio non ipsam et.', 'est-officiis-odit-praesentium-sequi', '333', '44', '1', '0', '2017-01-14 09:24:53', '1997', '2017', '2,3', '0');
@@ -514,6 +525,8 @@ INSERT INTO `xx_article` VALUES ('38', '1', '1', 'ceshi', '<p>ceshi</p>', 'cehi'
 INSERT INTO `xx_article` VALUES ('39', '1', '1', '333', '<p>333</p>', '333', '\r\n\r\n3333', '<p>3333</p>', '1', '0', '2017-02-01 14:41:10', '2017', '2017', '2,3', '0');
 INSERT INTO `xx_article` VALUES ('40', '0', '3', '标题', '描述', '', '444444444444444444444444444', '<p>444444444444444444444444444</p>', '1', '0', '2017-06-03 20:41:34', '0', '0', '2', '0');
 INSERT INTO `xx_article` VALUES ('44', '0', '1', '标题', '描述', '', '\r\n\r\n| Column 1 | Column 2 | Column 3 |\r\n| -------- | -------- | -------- |\r\n| Text     | Text     | Text     |\r\n\r\n\r\n', '<table>\n<thead>\n<tr>\n<th>Column 1</th>\n<th>Column 2</th>\n<th>Column 3</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Text</td>\n<td>Text</td>\n<td>Text</td>\n</tr>\n</tbody>\n</table>', '1', '0', '2017-06-03 20:46:56', '0', '0', '2', '0');
+INSERT INTO `xx_article` VALUES ('45', '0', '1', '444', 'ddd', '', 'dasdfddfdd', '<p>dasdfddfdd</p>', '1', '0', '2017-06-04 21:09:39', '0', '0', '3', '0');
+INSERT INTO `xx_article` VALUES ('46', '0', '4', 'mysql优化', '索引', '', '### mysql\r\n\r\n| id | name | sex |\r\n| -------- | -------- | -------- |\r\n| 2     | 刘安     | 35     |\r\n\r\n', '<h3>mysql</h3>\n<table>\n<thead>\n<tr>\n<th>id</th>\n<th>name</th>\n<th>sex</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2</td>\n<td>刘安</td>\n<td>35</td>\n</tr>\n</tbody>\n</table>', '2', '1', '2017-06-17 21:44:01', '0', '0', '2', '0');
 
 -- ----------------------------
 -- Table structure for xx_category
@@ -531,13 +544,11 @@ CREATE TABLE `xx_category` (
 -- ----------------------------
 -- Records of xx_category
 -- ----------------------------
-INSERT INTO `xx_category` VALUES ('1', '2017-01-14 09:24:52', 'Android', '0');
-INSERT INTO `xx_category` VALUES ('2', '2017-01-14 09:24:52', 'Java', '0');
-INSERT INTO `xx_category` VALUES ('3', '2017-01-14 09:24:52', 'Php', '0');
-INSERT INTO `xx_category` VALUES ('4', '2017-01-14 09:24:52', 'Spring', '0');
-INSERT INTO `xx_category` VALUES ('5', '2017-01-14 09:24:52', 'Laravel', '0');
-INSERT INTO `xx_category` VALUES ('6', '2017-01-14 09:24:52', 'Vue', '0');
-INSERT INTO `xx_category` VALUES ('7', '2017-01-14 09:24:52', 'Js', '0');
+INSERT INTO `xx_category` VALUES ('2', '2017-06-13 09:42:30', 'PHP', '0');
+INSERT INTO `xx_category` VALUES ('4', '2017-06-13 09:42:37', 'Mysql', '0');
+INSERT INTO `xx_category` VALUES ('5', '2017-06-13 09:42:44', 'Thinkphp5', '0');
+INSERT INTO `xx_category` VALUES ('6', '2017-06-13 09:43:47', 'Vue.js', '0');
+INSERT INTO `xx_category` VALUES ('7', '2017-06-13 09:43:30', 'Linux', '0');
 
 -- ----------------------------
 -- Table structure for xx_comment
@@ -546,10 +557,10 @@ DROP TABLE IF EXISTS `xx_comment`;
 CREATE TABLE `xx_comment` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
-  `article_id` int(11) NOT NULL COMMENT '文章id',
+  `article_id` int(11) DEFAULT NULL COMMENT '文章id',
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `html_content` text COLLATE utf8_unicode_ci NOT NULL,
-  `commentable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `commentable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -559,13 +570,33 @@ CREATE TABLE `xx_comment` (
   KEY `comments_user_id_index` (`user_id`),
   KEY `comments_commentable_id_index` (`article_id`),
   KEY `comments_commentable_type_index` (`commentable_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of xx_comment
 -- ----------------------------
-INSERT INTO `xx_comment` VALUES ('1', '1', '37', '评论', '<p>评论</p>', 'App\\Post', 'Justen Fisher', 'collier.fredrick@example.net', '2017-06-01 21:10:54', null, '1');
-INSERT INTO `xx_comment` VALUES ('2', '1', '37', '评论2', '<p>评论2</p>', 'App\\Post', 'Justen Fisher', 'collier.fredrick@example.net', '2017-06-01 21:10:30', null, '2');
+INSERT INTO `xx_comment` VALUES ('1', '1', '37', '评论', '<p>评论</p>', 'App\\Post', 'Justen Fisher', 'collier.fredrick@example.net', '2017-06-06 21:00:42', null, '2');
+INSERT INTO `xx_comment` VALUES ('2', '1', '2', '评论2', '<p>评论2</p>', 'App\\Post', 'Justen Fisher', 'collier.fredrick@example.net', '2017-06-13 09:37:06', null, '2');
+INSERT INTO `xx_comment` VALUES ('3', '1', '46', 'fdasfd', '<p>fdasfd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:20:28', null, '1');
+INSERT INTO `xx_comment` VALUES ('4', '1', '46', 'dasd', '<p>dasd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:22:02', null, '1');
+INSERT INTO `xx_comment` VALUES ('5', '1', null, 'dfasfd', '<p>dfasfd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:29:26', null, '1');
+INSERT INTO `xx_comment` VALUES ('6', '1', null, 'dfasfd', '<p>dfasfd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:29:29', null, '1');
+INSERT INTO `xx_comment` VALUES ('7', '1', null, 'dfasfd', '<p>dfasfd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:29:37', null, '1');
+INSERT INTO `xx_comment` VALUES ('8', '1', '46', 'ddd', '<p>ddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:31:40', null, '1');
+INSERT INTO `xx_comment` VALUES ('11', '1', null, 'ddd', '<p>ddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:37:15', null, '1');
+INSERT INTO `xx_comment` VALUES ('12', '1', null, 'ddd', '<p>ddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:37:18', null, '1');
+INSERT INTO `xx_comment` VALUES ('13', '1', null, '4444', '<p>4444</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:37:20', null, '1');
+INSERT INTO `xx_comment` VALUES ('14', '1', null, 'ddddddddddddddddddddd', '<p>ddddddddddddddddddddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-13 10:37:30', null, '1');
+INSERT INTO `xx_comment` VALUES ('15', '1', null, 'fdfdff', '<p>fdfdff</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 20:47:51', null, '1');
+INSERT INTO `xx_comment` VALUES ('16', '1', null, '444444', '<p>444444</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 20:47:55', null, '1');
+INSERT INTO `xx_comment` VALUES ('17', '1', null, '12345566', '<p>12345566</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 20:48:50', null, '1');
+INSERT INTO `xx_comment` VALUES ('18', '1', '46', 'ddd', '<p>ddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 22:37:21', null, '1');
+INSERT INTO `xx_comment` VALUES ('19', '1', null, '34333', '<p>34333</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 22:42:49', null, '1');
+INSERT INTO `xx_comment` VALUES ('20', '1', null, 'dddddddddddd', '<p>dddddddddddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 22:43:37', null, '1');
+INSERT INTO `xx_comment` VALUES ('21', '1', '46', 'ddddddddddddddddddd', '<p>ddddddddddddddddddd</p>', null, '刘安源', '1662853651@163.com', '2017-06-15 22:45:19', null, '1');
+INSERT INTO `xx_comment` VALUES ('22', '1', '46', 'fasfasdfsdf', '<p>fasfasdfsdf</p>', null, '刘安源', '1662853651@163.com', '2017-06-17 21:18:28', null, '1');
+INSERT INTO `xx_comment` VALUES ('23', '1', '46', 'fasfasdfsdffdasfdf', '<p>fasfasdfsdffdasfdf</p>', null, '刘安源', '1662853651@163.com', '2017-06-17 21:18:30', null, '1');
+INSERT INTO `xx_comment` VALUES ('24', '1', '46', 'fasfasdfsdffdasfffdf', '<p>fasfasdfsdffdasfffdf</p>', null, '刘安源', '1662853651@163.com', '2017-06-17 21:20:00', null, '1');
 
 -- ----------------------------
 -- Table structure for xx_image
@@ -579,14 +610,14 @@ CREATE TABLE `xx_image` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `files_key_unique` (`image_url`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of xx_image
 -- ----------------------------
-INSERT INTO `xx_image` VALUES ('1', 'bizhi362_15.jpg', 'xblog/image/72344ff3c91b0f480130a8ccaf261026.jpeg', '331287', '2017-01-14 11:56:04');
 INSERT INTO `xx_image` VALUES ('2', '1384998229592.jpg', '/xblog/image/d2658f022087316d86043db5dc6af353.jpeg', '138143', '2017-01-17 10:04:06');
 INSERT INTO `xx_image` VALUES ('3', '1384998236580.jpg', '/xblog/image/0aa6cdfa4980ec7ae6e857c295e5ecc0.jpeg', '1451111', '2017-01-17 10:04:30');
+INSERT INTO `xx_image` VALUES ('4', 'photo.jpg', '/demo/593f4474cec98.jpg', '13441', '2017-06-13 09:48:37');
 
 -- ----------------------------
 -- Table structure for xx_tag
@@ -598,21 +629,18 @@ CREATE TABLE `xx_tag` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tags_name_unique` (`tag_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of xx_tag
 -- ----------------------------
-INSERT INTO `xx_tag` VALUES ('1', 'a54hExU', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('2', 'uDZFdZq', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('3', 'mJtJiTx', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('4', 'RxO1TJq', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('5', '30q1a12', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('6', 'YMtVV3r', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('7', 'lxf03OJ', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('8', 'ZuzU9Cd', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('9', 'p4nrOPj', '2017-01-14 09:24:52');
-INSERT INTO `xx_tag` VALUES ('10', 'XumRRQ8', '2017-01-14 09:24:52');
+INSERT INTO `xx_tag` VALUES ('13', 'mysql', '2017-06-13 09:39:49');
+INSERT INTO `xx_tag` VALUES ('14', '索引', '2017-06-13 09:39:58');
+INSERT INTO `xx_tag` VALUES ('15', '数据库', '2017-06-13 09:40:04');
+INSERT INTO `xx_tag` VALUES ('16', 'php', '2017-06-13 09:40:15');
+INSERT INTO `xx_tag` VALUES ('17', 'laravel', '2017-06-13 09:40:22');
+INSERT INTO `xx_tag` VALUES ('18', 'thinkphp5', '2017-06-13 09:40:38');
+INSERT INTO `xx_tag` VALUES ('19', 'linux', '2017-06-13 09:41:10');
 
 -- ----------------------------
 -- Table structure for xx_user
@@ -639,9 +667,9 @@ CREATE TABLE `xx_user` (
   KEY `users_register_from_index` (`register_from`),
   KEY `users_github_id_index` (`github_id`),
   KEY `users_github_name_index` (`github_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of xx_user
 -- ----------------------------
-INSERT INTO `xx_user` VALUES ('1', '', '1662853651@163.com', 'e10adc3949ba59abbe56e057f20f883e', 'web_form', null, null, 'dd', '2da', '', '', '2017-05-28 15:01:55', null, null);
+INSERT INTO `xx_user` VALUES ('1', '刘安源', '1662853651@163.com', 'e10adc3949ba59abbe56e057f20f883e', 'web_form', null, null, 'dd', '2da', '', '', '2017-05-28 15:01:55', null, null);
